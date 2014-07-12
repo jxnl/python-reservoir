@@ -3,6 +3,15 @@
 A lightweight module for to generate a sample of elements any interable data structure
 or stream using the Reservoir Sampling algorithm.
 
+>Random sampling is often applied to very large datasets
+and in particular to data streams. In this case, the random sample has to be
+generated in one pass over an initially unknown population. An elegant and
+eﬃcient approach to generate random samples from data streams is the use
+of a reservoir of size k, where k is sample size. The reservoir-based sampling
+algorithms maintain the invariant that, at each step of the sampling process,
+the contents of the reservoir are a valid random sample for the set of items
+that have been processed up to that point. [--- Weighted Random Sampling over Data Streams](http://arxiv.org/pdf/1012.0256.pdf)
+
 ## Installation
 
 Just clone this repo and use the script provided! I'll consider adding this to the Python 
