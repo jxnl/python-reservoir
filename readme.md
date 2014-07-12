@@ -49,22 +49,20 @@ To use pipes and redirects use the `-s | --stream` flag.
 
 ### Module
 
-As a module the Class `UniformSampler` is quite simple.
+As a module the `UniformSampler` interface is quite simple.
 
     from reservoir import UniformSampler
     sampler = UniformSampler(max_samples=2)
 
-The only methods available are `accept` or `consume`.
-    
-    # sampler.accept takes in an item at a time
-    sampler.accept("github")
-    sampler.accept(1)
-    sampler.accept([1, 2, 3]) 
+    # sampler.feed takes in an item at a time
+    sampler.feed("github")
+    sampler.feed(1)
+    sampler.feed([1, 2, 3]) 
 
     sampler.saves
     >>> ["github", [1, 2, 3]]
 
-    # sampler.consume takes in an iterable and selects the k elements
-    sampler.accept(some_generator())
-    sampler.accept(dictionary.keys())
-    sampler.accept(xrange(1,10))
+    # sampler.stream_sample takes in an iterable and selects the k elements
+    sampler.stream_sample(some_generator())
+    sampler.stream_sample(dictionary.keys())
+    sampler.stream_sample(xrange(1,10))
