@@ -43,13 +43,11 @@ To use pipes and redirects use the `-s | --stream` flag.
 As a module the Class `UniformSampler` is quite simple.
 
     from reservoir import UniformSampler
-    
     sampler = UniformSampler(max_samples=2)
 
 The only methods available are `accept` or `consume`.
     
     # sampler.accept takes in an item at a time
-    
     sampler.accept("github")
     sampler.accept(1)
     sampler.accept([1, 2, 3]) 
