@@ -1,7 +1,7 @@
 # Reservoir
 
 A lightweight module for to generate a sample of elements any interable data structure
-or stream using the Reservoir Sampling algorithm.
+or stream using the Reservoir Sampling algorithm which samples a data stream in one pass.
 
 >Random sampling is often applied to very large datasets
 and in particular to data streams. In this case, the random sample has to be
