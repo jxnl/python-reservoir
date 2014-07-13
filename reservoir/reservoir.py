@@ -26,7 +26,7 @@ Date: May 24th, 2014
 """
 
 from random import randint
-import argparse
+from argparse import ArgumentParser
 import sys
 
 
@@ -81,7 +81,7 @@ class UniformSampler(object):
         return self.sample
 
     def __repr__(self):
-        return self.sample
+        return str(self.sample)
 
     def __str__(self):
         output = str()
@@ -96,13 +96,13 @@ def gen_parser():
               in particular to data streams. In this case, the random sample
               has to be generated in one pass over an potentially unknown population.
               """
-    parser = argparse.ArgumentParser(description=desc)
+    parser = ArgumentParser(description=desc)
     group = parser.add_mutually_exclusive_group()
     parser.add_argument('size',
                         help="The number of elements you wish you sample",
                         type=int)
     group.add_argument('-f', '--file',
-                       default=False,
+                      default=False,
                        type=str)
     group.add_argument('-s', '--stream',
                        default=False,
@@ -118,7 +118,7 @@ def main():
 
     if args.file:
         with open(args.file) as res:
-            sampler.consume(res)
+            sampler.stream_sample(res)
             print sampler
 
     if args.stream:
