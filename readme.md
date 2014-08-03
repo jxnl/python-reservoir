@@ -1,7 +1,6 @@
 # Reservoir
 
-A lightweight module for to generate a sample of elements any interable data structure
-or stream using the Reservoir Sampling algorithm which samples a data stream in one pass.
+A lightweight module for generating samples from interable data structures.
 
 >Random sampling is often applied to very large datasets
 and in particular to data streams. In this case, the random sample has to be
@@ -14,16 +13,15 @@ that have been processed up to that point. [--- Weighted Random Sampling over Da
 
 ## Installation
 
-Just clone this repo and use the script provided! I'll consider adding this to the Python 
-Package Index once I've figured out weighted sampling.
+    pip install Reservoir
 
 # Usage
 
 As a command line interface, just run the `-h` flag to see whats up.
 
-    $ python reservoir -h
+    $ res-sample -h
 
-    usage: reservoir.py [-h] [-f FILE | -s] size
+    usage: r [-h] [-f FILE | -s] size
 
     Sample k elements from a stream or file
 
@@ -37,15 +35,13 @@ As a command line interface, just run the `-h` flag to see whats up.
 
 ###  File and Streams
 
-Currently only supports reading a file, to output you'll need to do a redirect.
-
-    # sample 10 lines from input.txt
-    $ python reservoir.py -f input.txt 10 > output.txt
+    # sample 10 lines from 'input.txt'
+    $ res-sample -f input.txt 10
 
 To use pipes and redirects use the `-s | --stream` flag.
-    
+
     # sample 10 lines from my twitter api
-    $ twitterstream | python reservoir.py -s 10 > output.txt
+    $ twitter_stream.py | res-sample  -s 10 > output.txt
 
 ### Module
 
