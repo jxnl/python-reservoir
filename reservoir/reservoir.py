@@ -24,7 +24,7 @@ Author: Jason Liu
 Date: May 24th, 2014
 
 """
-
+from __future__ import print_function
 from random import randint
 from argparse import ArgumentParser
 import sys
@@ -119,12 +119,12 @@ def main():
     if args.file:
         with open(args.file) as res:
             sampler.stream_sample(res)
-            print sampler
+            print(sampler)
 
     if args.stream:
         for line in sys.stdin:
             sampler.feed(line.strip())
-        print sampler
+        print(sampler)
 
 if __name__ == "__main__":
     sys.exit(main())
