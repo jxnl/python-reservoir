@@ -35,7 +35,7 @@ class ExponentialSampler(ReservoirBase):
         http://personal.denison.edu/~lalla/acl2014.pdf
     """
     def __init__(self, decay=1.1, size=10):
-        ReservoirBase.__init__(self, size=size)
+        super().__init__(size=size)
         self.decay = decay
 
     def accept(self):
