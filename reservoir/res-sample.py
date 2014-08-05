@@ -25,70 +25,8 @@ Date: May 24th, 2014
 
 """
 from __future__ import print_function
-from random import randint
 from argparse import ArgumentParser
 import sys
-
-
-class UniformSampler(object):
-
-    """Uniformly sample k elements from an iterable.
-
-    Attributes:
-        samples (list): Reservoir of random samples.
-        counter (int): Saves the total number of values seen.
-        _max (int): The max number of samples allowed in memory.
-
-    """
-
-    def __init__(self, size=10):
-        self.sample = list()
-        self.counter = int()
-        self._max = size
-
-    def feed(self, item):
-        """Feed new values into sampler and insert if selected.
-
-        Args:
-            item: Item you wish you sample next.
-
-        Returns:
-            The resulting reservoir after sampling.
-
-        """
-        self.counter += 1
-        switch = randint(0, self.counter)
-        if len(self.sample) < self._max:
-            self.sample.append(item)
-        elif switch < self._max:
-            self.sample[switch] = item
-
-        return self.sample
-
-    def stream_sample(self, stream):
-        """Sample k elements from an iterable! Duh.
-
-        Args:
-            stream: Any iterable object to sample from.
-
-        Returns:
-            Rhe list of elements sampled from the iterable
-
-        """
-        for item in stream:
-            self.feed(item)
-
-        return self.sample
-
-    def __repr__(self):
-        return str(self.sample)
-
-    def __str__(self):
-        output = str()
-        for item in self.sample:
-            output += "{item}\n".format(item=item.strip())  # strip?
-        return output
-
 
 def gen_parser():
     """Generate the CLI argparse object"""
