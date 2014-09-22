@@ -1,3 +1,7 @@
 *pyc
+.ropeproject/
+reservoir/.ropeproject/
+reservoir/_fake_data.txt
+reservoir/_fake_data_weighted.txt
 .DS_store
 

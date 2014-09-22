@@ -23,7 +23,6 @@ class ReservoirBase(object):
 
         Arguments:
             element (any): new element that may go into the reservoir
-
         """
         if self.counter < self._max:
             self.reservoir.append(element)
@@ -36,7 +35,6 @@ class ReservoirBase(object):
 
         Arguments:
             new_element (any): a new element that much go into the reservoir
-
         """
         choose = random.randint(0, self._max-1)
         self.reservoir[choose] = new_element
@@ -46,7 +44,6 @@ class ReservoirBase(object):
 
         Arguments:
             stream (iterable): stream from which to sample
-
         """
         for element in stream:
             self.append(element)

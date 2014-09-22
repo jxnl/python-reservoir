@@ -37,27 +37,36 @@ class AbsoluteWeightSampler(ReservoirBase):
     Attributes:
         reservoir (list): Reservoir of random samples.
         counter (int): Saves the total number of values seen (n)
+        sep (str): Delimiter to split text values on, (default=None)
         _max (int): the max number of samples allowed in memory (k)
 
     References:
         Pavlos S. Efraimidis. Weighted Random Sampling over Data Streams
-
     """
-    def __init__(self, size=10):
-        self.reservoir = heapq.heapify([]*size)
-        self.counter = int(0)
+    def __init__(self, size=10, sep=None):
+        self.reservoir = []
+        self.counter = 0
+        self.sep = sep
         self._max = size
 
     def append(self, pair):
         """Accepts new element into the reservoir
 
         Arguments:
-            element (any): new element that may go into the reservoir
+            pair (tuple, list, string): new that may go into the reservoir
 
         """
-        weight, element = pair
+        if self.sep:
+            weight, element = pair.split(self.sep)
+        else:
+            weight, element = pair
+
         key = random.random()**(1 / weight)
-        self.reservoir.heapreplace((key, element))
+
+        if self.counter < self._max:
+            heapq.heappush(self.reservoir, (key, element))
+        else:
+            heapq.heapreplace(self.reservoir, (key, element))
         self.counter += 1
 
 
@@ -75,10 +84,11 @@ class ExponentialSampler(ReservoirBase):
     References:
         "Exponential Reservoir Sampling for Streaming Language Models"
         http://personal.denison.edu/~lalla/acl2014.pdf
+
     """
     def __init__(self, decay=1.1, size=10):
         ReservoirBase.__init__(self, size=size)
-        self.decay = decay
+        self.decay = 1 / decay
 
     def accept(self):
         probability = self._max * (1 - math.exp(-1 / self.decay))

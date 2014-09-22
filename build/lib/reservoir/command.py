@@ -41,7 +41,7 @@ def gen_parser():
                          help="""Apply an exponential bias to items near
                          the end of stream""")
 
-    sampler.add_argument('-w', '--sep', type=str, default=",",
+    sampler.add_argument('-w', '--sep', type=str,
                          help="""Apply bias proportional to the weight
                          of the sample.""")
     return parser
@@ -55,12 +55,11 @@ def main():
         sampler = UniformSampler(size=args.size)
 
     if args.decay:
-        sampler = ExponentialSampler(size=args.size,
-                                     decay=args.decay)
+        sampler = ExponentialSampler(size=args.size, decay=args.decay)
 
     if args.sep:
-        sampler = AbsoluteWeightSampler(size=args.size,
-                                        sep=args.sep)
+        print(args.sep)
+        sampler = AbsoluteWeightSampler(size=args.size, sep=args.sep)
 
     if args.file:
         with open(args.file) as res:

@@ -12,35 +12,46 @@ class ReservoirBase(object):
 
     def __init__(self, size=10):
         self.reservoir = list()
-        self.counter = int()
+        self.counter = int(0)
         self._max = size
 
     def accept(self):
         pass
 
-    def feed(self, item):
-        """Consumes a new item and decides weither or not to accept it"""
+    def append(self, element):
+        """Accepts a new element into the reservoir
+
+        Arguments:
+            element (any): new element that may go into the reservoir
+        """
         if self.counter < self._max:
-            self.reservoir.append(item)
+            self.reservoir.append(element)
         elif random.random() < self.accept():
-            self.swap(item)
+            self.swap(element)
         self.counter += 1
 
-    def swap(self, item):
-        """Changes a random item from the reservoir with new item"""
+    def swap(self, new_element):
+        """Changes a random element from the reservoir with a new element
+
+        Arguments:
+            new_element (any): a new element that much go into the reservoir
+        """
         choose = random.randint(0, self._max-1)
-        self.reservoir[choose] = item
+        self.reservoir[choose] = new_element
 
     def sample(self, stream):
         """Samples data stream and feeds into
 
         Arguments:
             stream (iterable): stream from which to sample
-
         """
-        for item in stream:
-            self.feed(item)
+        for element in stream:
+            self.append(element)
         return self.reservoir
+
+    def __iter__(self):
+        for element in self.reservoir:
+            yield element
 
     def __repr__(self):
         return str(self.reservoir)
